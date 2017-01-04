@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <script src="https://use.fontawesome.com/7ac1a023cf.js"></script>
+  <link rel="icon" href="http://i.imgur.com/u8LLKxO.png">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+
+  <link rel="manifest" href="manifest.json">
+
+  <!-- un-comment this code to enable service worker
+  <script>
+  if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+  .then(() => console.log('service worker installed'))
+  .catch(err => console.log('Error', err));
+}
+</script>-->
+
+<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+<link href="css/ionic.app.css" rel="stylesheet">
+-->
+
+<!-- ionic/angularjs js -->
+<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+<!-- cordova script (this will be a 404 during development) -->
+<script src="cordova.js"></script>
+
+<!-- your app's js -->
+<script src="js/app.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/services.js"></script>
+</head>
+<body ng-app="starter">
+  <!--
+  The nav bar that will be updated as we navigate between views.
+-->
+<ion-nav-bar class="tabs tabs-item-hide">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+<!--
+The views will be rendered in the <ion-nav-view> directive below
+Templates are in the /templates folder (but you could also
+have templates inline in this html file if you'd like).
+-->
+<!-- <ion-nav-view></ion-nav-view> -->
+<ion-view hide-nav-bar="true" id="title" view-title="Later 'Gator!">
+  <ion-nav-title></ion-nav-title>
+  <ion-content scroll="false">
+
+    <main ng-controller = 'DestinationsCtrl as destinations'>
+
+      <div class="cityInfo">
+
+
+        <div class="image-container">
+          <h2 ng-hide="destinations.random"></h2>
+          <h2 ng-cloak class="greyish" ng-show="destinations.random"> {{destinations.destination.city_name}}</h2>
+          <h3 ng-cloak class="greyish">{{ destinations.destination.country_name }}</h3>
+          <img ng-cloak spinner-on-load onerror="this.style.display='none'" class="image-here" ng-src="http://nomadlist.com{{destinations.destination.image}}" alt="" />
+          <img ng-cloak src="http://illfloentertainment.com/wp-content/uploads/2013/06/invers-double-arrow-down-128-300x300.png" ng-show="destinations.random" ng-click="destinations.showInfo()" class="arrows" />
+          <p ng-hide="destinations.random">
+            Find your city. Pack your bags.
+          </p>
+
+        </div>
+
+        <div class="hiddenDiv">
+          <ul>
+            <li  class="li-one">Hotel cost: <span>£{{ destinations.destination.hotel_cost }}</span></li>
+            <li class="li-two">AirBnB cost: <span>£{{ destinations.destination.airbnb_cost }}</span></li>
+            <li class="li-three">Coffee: <span>£{{ destinations.destination.coffee_cost }}</span></li>
+            <li class="li-four">Beer: <span>£{{ destinations.destination.beer_cost}}<span></li>
+
+              <li class="li-five">Nightlife: <span><i ng-repeat="stars in destinations.destination.nightlife_score track by $index" class="fa fa-star" aria-hidden="true"></i><span></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- <h4 ng-hide="destinations.destinations">LOADING...</h4> -->
+          <i ng-hide="destinations.destinations" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          <!-- <span ng-hide="destinations.destinations" class="sr-only">Loading...</span> -->
+          <div hidden class="clickarea">
+            <img ng-click='destinations.randomize()' class="clicky globe" src="http://imgur.com/ItP8BoK.png" alt="" />
+            <p  ng-click='destinations.randomize()' class="instructions">
+              Touch to globe trot.
+            </p>
+          </div>
+        </main>
+
+
+      </ion-content>
+    </ion-view>
+
+  </body>
+  </html>

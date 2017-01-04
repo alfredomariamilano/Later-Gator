@@ -1,0 +1,40 @@
+<ion-view hide-nav-bar="true" id="title" view-title="Later 'Gator!">
+  <ion-nav-title>Later Gater</ion-nav-title>
+  <ion-content>
+
+    <main ng-controller = 'DestinationsCtrl as destinations'>
+      <!-- <ul>
+      <li ng-repeat='name in destinations.names'>
+      {{name}}
+    </li>
+  </ul> -->
+  <div class="cityInfo">
+
+
+    <div class="image-container">
+      <h2 ng-hide="destinations.random">Spin that shit</h2>
+      <h2 ng-show="destinations.random">
+        {{destinations.destinations[destinations.random].info.city.name}}
+      </h2>
+      <h3>{{ destinations.destinations[destinations.random].info.country.name }}</h3>
+      <img err-src="http://farm3.static.flickr.com/2700/4197795069_a7d3c238d3.jpg" ng-src="http://nomadlist.com{{destinations.destinations[destinations.random].media.image['500']}}" alt="" />
+    </div>
+
+    <div class="hiddenDiv">
+      <ul>
+        <li  class="li-one">Hotel cost: ${{ destinations.destinations[destinations.random].cost.hotel.USD }}</li>
+        <li class="li-two">AirBnB cost: ${{ destinations.destinations[destinations.random].cost.airbnb_median.USD }}</li>
+        <li class="li-three">Coffee: ${{ destinations.destinations[destinations.random].cost.coffee_in_cafe.USD }}/cup</li>
+        <li class="li-four">Beer: ${{ destinations.destinations[destinations.random].cost.beer_in_cafe.USD }}/pint</li>
+        <li class="li-five">Nightlife: <meter min="0" max="10" value="{{ destinations.destinations[destinations.random].scores.nightlife*10 }}"></li>
+      </ul>
+    </div>
+  </div>
+
+  <h4 ng-hide="destinations.destinations">LOADING...</h4>
+  <button ng-show="destinations.destinations" type="button" name="button" ng-click='destinations.randomize()'><img src="http://i.imgur.com/u8LLKxO.png" alt="" /></button>
+</main>
+
+
+</ion-content>
+</ion-view>
